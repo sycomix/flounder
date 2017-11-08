@@ -12,12 +12,12 @@ setup(
     author='flatfisher',
     author_email='shimano.entou@gmail.com',
     license='MIT',
-    keywords='dialogflow', 'entity', 'dialogflow entity'],
+    keywords=['dialogflow', 'dialogflow entity'],
     packages=[
         "flounder"
     ],
     install_requires=requires,
     classifiers=[
-        'Programming Language :: Python :: 2.7.13',
+        'Programming Language :: Python :: 2.7',
     ],
 )
