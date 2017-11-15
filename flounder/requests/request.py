@@ -34,12 +34,13 @@ class Request(object):
                  client_access_token,
                  base_url,
                  path,
-                 query_parameters=[]):
+                 create_parameters=[]
+                 ):
         super(Request, self).__init__()
 
         self.base_url = base_url
         self.path = path
-        self.query_parameters = query_parameters
+        self.create_parameters = create_parameters
 
         self.client_access_token = client_access_token
 
@@ -68,9 +69,11 @@ class Request(object):
             self.proxy_port = int(self.proxy_port)
 
     def _prepare_request(self, debug=False):
-        if (self.proxy_enabled):
-            self._connection = self._connection_class(self.proxy_host,
-                                                      self.proxy_port)
+        if(self.proxy_enabled):
+            self._connection = self._connection_class(
+                self.proxy_host,
+                self.proxy_port
+            )
 
             self._connection.set_tunnel(self.base_url)
         else:
@@ -79,32 +82,49 @@ class Request(object):
     def _connect(self):
         self._connection.connect()
 
-        query = None
+        create = None
 
         try:
-            query = urllib.urlencode(self.query_parameters)
+            create = urllib.urlencode(self.create_parameters)
         except AttributeError:
-            query = urllib.parse.urlencode(self.query_parameters)
+            create = urllib.parse.urlencode(self.create_parameters)
 
-        full_path = self.path + '?' + query
-
-        self._connection.putrequest('POST', full_path, skip_accept_encoding=1)
+        full_path = self.path + '?' + create
+        import json
+        body = json.dumps({"entries": [{"synonyms": ["apple", "red apple"],"value": "apple"},{"value": "banana"}],"name": "fruit"})
+        print full_path
+        self._connection.putrequest('POST',full_path, skip_accept_encoding=1)
 
         headers = {
             'Accept': 'application/json',
-            'Authorization': ('Bearer %s' % self.client_access_token)
+            'Authorization': ('Bearer %s' % self.client_access_token),
+            'Content-Length': str(len(body))
         }
 
-        headers.update(headers)
+        headers.update(self._prepare_headers())
 
         for header_key, header_value in headers.items():
             self._connection.putheader(header_key, header_value)
 
         self._connection.endheaders()
+        self._connection.send(body)
+
+    def _beforegetresponce(self):
+        pass
 
     def getresponse(self):
-        """Send all data and wait for response.
-        """
         self._connect()
-        print self.__dict__.keys()
+
         return self._connection.getresponse()
+
+    def _prepare_entities(self):
+        raise NotImplementedError("Please Implement this method")
+
+    def _prepare_headers(self):
+        raise NotImplementedError("Please Implement this method")
+
+    def _prepage_begin_request_data(self):
+        raise NotImplementedError("Please Implement this method")
+
+    def _prepage_end_request_data(self):
+        raise NotImplementedError("Please Implement this method")

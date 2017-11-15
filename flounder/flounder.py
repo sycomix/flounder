@@ -1,19 +1,30 @@
 # -*- coding:utf8 -*-
 # !/usr/bin/env python
 
+try:  # Python 3
+    from http.client import HTTPSConnection
+except ImportError:
+    from httplib import HTTPSConnection
 
-from .requests import CreateRequest
+import uuid
+
+from .requests import (
+    CreateRequest
+)
+
+import warnings
 
 DEFAULT_VERSION = '20150910'
 
 
 class Flounder(object):
-    """
-        Create entities
-    """
+    _connection_class = HTTPSConnection
+
     @property
     def client_access_token(self):
         """
+            Client access token provided by https://daialogflow.com/
+
             :rtype: str or unicode
         """
 
@@ -27,22 +38,33 @@ class Flounder(object):
 
         self._client_access_token = client_access_token
 
-    def __init__(self, client_access_token):
+    @property
+    def entities(self):
+        return self._entities
+
+    @entities.setter
+    def entities(self, entities=[]):
+        self._entities = entities
+
+    def __init__(self, client_access_token, session_id=None):
         super(Flounder, self).__init__()
         self._client_access_token = client_access_token
-
+        self._entities = []
         self._base_url = 'api.dialogflow.com'
         self._version = DEFAULT_VERSION
 
-    def create_request(self):
-        """
-            (session_id, version,client_access_token).
-            :rtype TextRequest:
-        """
+        if session_id is None:
+            self._session_id = uuid.uuid4().hex
+        else:
+            self._session_id = session_id
 
+
+    def create_request(self):
         request = CreateRequest(
             self.client_access_token,
             self._base_url,
             self._version,
+            self.entities
         )
+
         return request
