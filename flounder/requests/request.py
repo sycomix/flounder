@@ -30,21 +30,26 @@ class Request(object):
     def client_access_token(self, client_access_token):
         self._client_access_token = client_access_token
 
-    def __init__(self, client_access_token, base_url, path):
+    def __init__(self,
+                 client_access_token,
+                 base_url,
+                 path,
+                 query_parameters=[]):
         super(Request, self).__init__()
 
         self.base_url = base_url
         self.path = path
+        self.query_parameters = query_parameters
 
         self.client_access_token = client_access_token
 
         self._prepare_proxy()
         self._prepare_request()
 
-    # def _prepare_entities(self):
-    #     if self.entities:
-    #         return list(map(lambda x: x._to_dict(), self.entities))
-    #     return None
+    def _prepare_entities(self):
+        if self.entities:
+            return list(map(lambda x: x._to_dict(), self.entities))
+        return None
 
     def _prepare_proxy(self):
 
@@ -74,12 +79,12 @@ class Request(object):
     def _connect(self):
         self._connection.connect()
 
-        # query = None
+        query = None
 
-        # try:
-        #     query = urllib.urlencode(self.query_parameters)
-        # except AttributeError:
-        #     query = urllib.parse.urlencode(self.query_parameters)
+        try:
+            query = urllib.urlencode(self.query_parameters)
+        except AttributeError:
+            query = urllib.parse.urlencode(self.query_parameters)
 
         full_path = self.path + '?' + query
 
@@ -90,50 +95,16 @@ class Request(object):
             'Authorization': ('Bearer %s' % self.client_access_token)
         }
 
-        headers.update(self._prepare_headers())
+        headers.update(headers)
 
         for header_key, header_value in headers.items():
             self._connection.putheader(header_key, header_value)
 
         self._connection.endheaders()
 
-        begin = self._prepage_begin_request_data()
-
-        if begin is not None:
-            self.send(begin.encode('utf-8'))
-
     def getresponse(self):
         """Send all data and wait for response.
         """
-
-        if getattr(self._connection, 'sock', None) is None:
-            self._connect()
-
-        end = self._prepage_end_request_data()
-
-        if end is not None:
-            self.send(end.encode('utf-8'))
-
-        self._beforegetresponce()
-
+        self._connect()
+        print self.__dict__.keys()
         return self._connection.getresponse()
-
-    def send(self, chunk):
-        """Send a given data chunk of voice data."""
-
-        if getattr(self._connection, 'sock', None) is None:
-            self._connect()
-
-        self._connection.send(chunk)
-
-    def _beforegetresponce(self):
-        pass
-
-    def _prepare_headers(self):
-        raise NotImplementedError("Please Implement this method")
-
-    def _prepage_begin_request_data(self):
-        raise NotImplementedError("Please Implement this method")
-
-    def _prepage_end_request_data(self):
-        raise NotImplementedError("Please Implement this method")

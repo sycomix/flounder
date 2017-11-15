@@ -9,15 +9,18 @@ except ImportError:
         os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
     from flounder.flounder import Flounder
 
-CLIENT_ACCESS_TOKEN = 'CLIENT_ACCESS_TOKEN'
+CLIENT_ACCESS_TOKEN = '704feeb63be04870ab69b9de12ca1331'
 
 
 class TestActions(unittest.TestCase):
     def setUp(self):
         self.flounder = Flounder(CLIENT_ACCESS_TOKEN)
 
-    def test_show_token(self):
-        print self.flounder.client_access_token
+    def test_create_entity(self):
+        create_request = self.flounder.create_request()
+        response = create_request.getresponse()
+        print response.status, response.reason
+        return response
 
 
 if __name__ == '__main__':
