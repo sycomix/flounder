@@ -1,8 +1,8 @@
 # -*- coding:utf8 -*-
 # !/usr/bin/env python
 
-class Flounder(object):
 
+class Flounder(object):
     @property
     def client_access_token(self):
         """
