@@ -12,7 +12,7 @@ except ImportError:
 DEVELOPER_ACCESS_TOKEN = ''
 
 
-class TestActions(unittest.TestCase):
+class TestFlounder(unittest.TestCase):
     def setUp(self):
         self.flounder = Flounder(DEVELOPER_ACCESS_TOKEN)
         return
