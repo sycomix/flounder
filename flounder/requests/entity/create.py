@@ -1,8 +1,6 @@
 # -*- coding:utf8 -*-
 # !/usr/bin/env python
 
-import json
-
 from ..request import Request
 
 from time import gmtime
@@ -10,15 +8,11 @@ from time import strftime
 
 class CreateRequest(Request):
     """
-        Abstract request class
-        Contain share information for all Create requests.
+        TODO:WRITE ABOUT THIS
     """
 
     @property
     def entities(self):
-        """Array of entities that replace developer defined entities for this
-        request only.
-        The entity(ies) need to exist in the developer console."""
         return self._entities
 
     @entities.setter

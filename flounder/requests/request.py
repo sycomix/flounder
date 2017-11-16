@@ -2,6 +2,7 @@
 # !/usr/bin/env python
 
 import urllib
+import json
 import os
 
 try:  # Python 3
@@ -16,8 +17,9 @@ except ImportError:
 
 
 class Request(object):
-    """Abstract request class
-    Contain share information for all requests."""
+    """
+    TODO:WRITE ABOUT THIS
+    """
 
     _connection_class = HTTPSConnection
 
@@ -60,9 +62,6 @@ class Request(object):
             self.proxy_enabled = True
             https_proxy = os.environ["https_proxy"]
 
-            # As proxies are set like "export https_proxy=$http_proxy"
-            # so it might start with 'https' or 'http'
-
             https_proxy = https_proxy.replace("https://", "").rstrip("/")
             https_proxy = https_proxy.replace("http://", "").rstrip("/")
             (self.proxy_host, self.proxy_port) = https_proxy.split(":")
@@ -90,9 +89,9 @@ class Request(object):
             create = urllib.parse.urlencode(self.create_parameters)
 
         full_path = self.path + '?' + create
-        import json
-        body = json.dumps({"entries": [{"synonyms": ["apple", "red apple"],"value": "apple"},{"value": "banana"}],"name": "fruit"})
-        print full_path
+
+        body = json.dumps(self.entities)
+
         self._connection.putrequest('POST',full_path, skip_accept_encoding=1)
 
         headers = {
@@ -116,9 +115,6 @@ class Request(object):
         self._connect()
 
         return self._connection.getresponse()
-
-    def _prepare_entities(self):
-        raise NotImplementedError("Please Implement this method")
 
     def _prepare_headers(self):
         raise NotImplementedError("Please Implement this method")
