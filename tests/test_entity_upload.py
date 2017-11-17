@@ -9,18 +9,16 @@ except ImportError:
         os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
     from flounder.flounder import Flounder
 
-DEVELOPER_ACCESS_TOKEN = ''
+DEVELOPER_ACCESS_TOKEN = '704feeb63be04870ab69b9de12ca1331'
 
-
+ 
 class TestFlounder(unittest.TestCase):
     def setUp(self):
         self.flounder = Flounder(DEVELOPER_ACCESS_TOKEN)
         return
 
     def test_create(self):
-        entities = {"entries": [{"synonyms": ["apple", "red apple"],"value": "apple"},{"value": "banana"}],"name": "fruit"}
-        self.flounder.entities = entities
-        create_request = self.flounder.create_request()
+        create_request = self.flounder.create_request('Sushi', '/Users/flatfisher/Documents/git/dialogflow/flounder/tests/sushi.csv')
         response = create_request.getresponse()
         print response.read()
         print response.status, response.reason

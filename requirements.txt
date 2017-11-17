@@ -1,1 +1,2 @@
 git+https://github.com/miurahr/pykakasi
+mojimoji==0.0.6
