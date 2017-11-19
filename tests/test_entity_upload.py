@@ -9,7 +9,7 @@ except ImportError:
         os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
     from flounder.flounder import Flounder
 
-DEVELOPER_ACCESS_TOKEN = '704feeb63be04870ab69b9de12ca1331'
+DEVELOPER_ACCESS_TOKEN = ''
 
  
 class TestFlounder(unittest.TestCase):
