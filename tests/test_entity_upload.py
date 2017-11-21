@@ -9,7 +9,7 @@ except ImportError:
         os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
     from flounder.flounder import Flounder
 
-DEVELOPER_ACCESS_TOKEN = ''
+DEVELOPER_ACCESS_TOKEN = 'YOUR_DEVELOPER_ACCESS_TOKEN'
 
  
 class TestFlounder(unittest.TestCase):
@@ -18,7 +18,7 @@ class TestFlounder(unittest.TestCase):
         return
 
     def test_create(self):
-        create_request = self.flounder.create_request('Sushi', '/Users/flatfisher/Documents/git/dialogflow/flounder/tests/sushi.csv')
+        create_request = self.flounder.create_request('Sushi', 'sushi.csv')
         response = create_request.getresponse()
         print response.read()
         print response.status, response.reason
