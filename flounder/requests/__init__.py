@@ -1,8 +1,8 @@
 # -*- coding:utf8 -*-
 # !/usr/bin/env python
 
-from .request import Request
-from .entity import CreateRequest
+from request import Request
+from entity import CreateRequest
 
 """
 dialogflow

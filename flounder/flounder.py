@@ -9,9 +9,7 @@ except ImportError:
 import csv
 import uuid
 
-from .requests import (
-    CreateRequest
-)
+from requests.entity.create import CreateRequest
 
 import warnings
 
@@ -37,8 +35,11 @@ class Flounder(object):
         """
         self._client_access_token = client_access_token
 
-
-    def __init__(self, client_access_token, entity_name=None, entity_csv=None, session_id=None):
+    def __init__(self,
+                 client_access_token,
+                 entity_name=None,
+                 entity_csv=None,
+                 session_id=None):
         super(Flounder, self).__init__()
         self._client_access_token = client_access_token
         self._base_url = 'api.dialogflow.com'
@@ -49,15 +50,10 @@ class Flounder(object):
         else:
             self._session_id = session_id
 
-
     def create_request(self, entity_name, csv_path):
-        entity =  self.create_entity(entity_name, csv_path)
-        request = CreateRequest(
-            self.client_access_token,
-            self._base_url,
-            self._version,
-            entity
-        )
+        entity = self.create_entity(entity_name, csv_path)
+        request = CreateRequest(self.client_access_token, self._base_url,
+                                self._version, entity)
         return request
 
     def create_entity(self, name, csv_path):
@@ -68,15 +64,11 @@ class Flounder(object):
             hiragana = self.to_hiragana(synonym)
             katakana = self.to_katakana(synonym)
             new_synonym = {
-                "synonyms":[
-                    synonym,
-                    romaji,
-                    hiragana,
-                    katakana
-                ],"value":romaji
+                "synonyms": [synonym, romaji, hiragana, katakana],
+                "value": romaji
             }
             tmp_list.append(new_synonym)
-        return {"entries":tmp_list,"name": name}
+        return {"entries": tmp_list, "name": name}
 
     def to_romaji(self, text):
         from pykakasi import kakasi
@@ -89,7 +81,6 @@ class Flounder(object):
         converter = kakasi.getConverter()
         return converter.do(text.decode('utf-8'))
 
-
     def to_hiragana(self, text):
         from pykakasi import kakasi
         kakasi = kakasi()
@@ -100,7 +91,6 @@ class Flounder(object):
         kakasi.setMode('a', 'H')
         converter = kakasi.getConverter()
         return converter.do(text.decode('utf-8'))
-
 
     def to_katakana(self, text):
         from pykakasi import kakasi
@@ -119,4 +109,4 @@ class Flounder(object):
             reader = csv.reader(f)
             for row in reader:
                 tmp_list.append(row[0])
-            return tmp_list 
+            return tmp_list

@@ -1,7 +1,7 @@
 # -*- coding:utf8 -*-
 # !/usr/bin/env python
 
-from ..request import Request
+from flounder.requests.request import Request
 
 from time import gmtime
 from time import strftime
