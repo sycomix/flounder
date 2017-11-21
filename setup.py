@@ -1,12 +1,12 @@
 from setuptools import setup
 
 
-requires = ["requests==2.18.4","git+https://github.com/miurahr/pykakasi"]
+requires = ["requests==2.18.4"]
 
 
 setup(
     name='flounder',
-    version='0.0.2',
+    version='0.0.5',
     description='flounder is a library that create Entity of Dialogflow. This library uses RestAPI of dialogflow. It is not an official library.',
     url='https://github.com/flatfisher/flounder',
     author='flatfisher',
@@ -20,4 +20,7 @@ setup(
     classifiers=[
         'Programming Language :: Python :: 2.7',
     ],
+    dependency_links=[
+        "https://github.com/miurahr/pykakasi"
+    ]
 )
