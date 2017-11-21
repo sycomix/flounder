@@ -9,7 +9,7 @@ except ImportError:
 import csv
 import uuid
 
-from requests.entity.create import CreateRequest
+from .requests.entity.create import CreateRequest
 
 import warnings
 

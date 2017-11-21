@@ -1,7 +1,7 @@
 # -*- coding:utf8 -*-
 # !/usr/bin/env python
 
-from create import CreateRequest
+from .create import CreateRequest
 
 """
 dialogflow
