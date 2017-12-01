@@ -4,6 +4,14 @@ flounderはdialogflowのEntityを作るためのライブラリです。公式�
 
 ## Installation
 
+### flounder requires:
+
+```
+pip install git+https://github.com/miurahr/pykakasi.git
+```
+
+### install flounder:
+
 ```
 pip install flounder
 ```

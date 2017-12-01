@@ -6,7 +6,7 @@ requires = ["requests==2.18.4"]
 
 setup(
     name='flounder',
-    version='0.0.5',
+    version='0.0.6',
     description='flounder is a library that create Entity of Dialogflow. This library uses RestAPI of dialogflow. It is not an official library.',
     url='https://github.com/flatfisher/flounder',
     author='flatfisher',

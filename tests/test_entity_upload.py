@@ -20,8 +20,8 @@ class TestFlounder(unittest.TestCase):
     def test_create(self):
         create_request = self.flounder.create_request('Sushi', 'sushi.csv')
         response = create_request.getresponse()
-        print response.read()
-        print response.status, response.reason
+        print (response.read())
+        print (response.status, response.reason)
         return
 
 
