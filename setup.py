@@ -19,8 +19,5 @@ setup(
     install_requires=requires,
     classifiers=[
         'Programming Language :: Python :: 2.7',
-    ],
-    dependency_links=[
-        "https://github.com/miurahr/pykakasi"
     ]
 )
