@@ -6,7 +6,7 @@ requires = ["requests==2.18.4"]
 
 setup(
     name='flounder',
-    version='0.0.6',
+    version='0.0.8',
     description='flounder is a library that create Entity of Dialogflow. This library uses RestAPI of dialogflow. It is not an official library.',
     url='https://github.com/flatfisher/flounder',
     author='flatfisher',
@@ -14,7 +14,9 @@ setup(
     license='MIT',
     keywords=['dialogflow', 'dialogflow entity'],
     packages=[
-        "flounder"
+        "flounder",
+        "flounder.requests",
+        "flounder.requests.entity"
     ],
     install_requires=requires,
     classifiers=[

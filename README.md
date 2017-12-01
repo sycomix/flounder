@@ -18,8 +18,32 @@ pip install flounder
 
 ## Example
 
+```py:test_entity_upload.py
+from flounder.flounder import Flounder
+
+flounder = Flounder(DEVELOPER_ACCESS_TOKEN)
+create_request = flounder.create_request('Sushi', 'sushi.csv')
+response = create_request.getresponse()
+
+print (response.read())
+print (response.status, response.reason)
 ```
-preparing
+
+### CSV
+
+```text:sushi.csv
+"鯖"
+"鯵"
+"鰈"
+"鱸"
+"鮑"
+"鮪"
+"鯨"
+"鮭"
+```
+
+```
+$ python test_entity_upload.py
 ```
 
 ## License
