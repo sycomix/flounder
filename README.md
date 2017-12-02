@@ -46,6 +46,8 @@ print (response.status, response.reason)
 $ python test_entity_upload.py
 ```
 
+### Automatically generated Entity
+
 ![Automatically generated Entity](https://github.com/flatfisher/flounder/blob/master/sushi_entity.png)
 
 ## License
