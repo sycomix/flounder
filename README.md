@@ -46,5 +46,7 @@ print (response.status, response.reason)
 $ python test_entity_upload.py
 ```
 
+![Automatically generated Entity](https://github.com/flatfisher/flounder/blob/master/entity.png)
+
 ## License
 flounder is licensed under MIT License. See LICENSE for more information.
