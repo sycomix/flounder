@@ -1,6 +1,6 @@
 # flounder
-flounder is a library that create Entity of Dialogflow.
-This library uses RestAPI of dialogflow. It is not an official library.
+flounderはdialogflowのEntityを作るためのライブラリです。公式ライブラリではありません。
+このライブラリはdialogflowの Rest APIを使用しています。
 
 ## Installation
 
@@ -46,9 +46,9 @@ print (response.status, response.reason)
 $ python test_entity_upload.py
 ```
 
-### Automatically generated Entity
+### 自動生成されたEntity
 
-![Automatically generated Entity](https://github.com/flatfisher/flounder/blob/master/sushi_entity.png)
+![自動生成されたEntity](https://github.com/flatfisher/flounder/blob/master/sushi_entity.png)
 
 ## License
 flounder is licensed under MIT License. See LICENSE for more information.

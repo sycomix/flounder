@@ -1,15 +1,15 @@
 # Contributing to flounder
 
 ## Issues
-Feel free to submit issues and enhancement requests.
+課題や欲しい機能などがあれば書いてください。
 
 ## Contributing
-In general, we follow the "fork-and-pull" Git workflow.
+基本的に"fork-and-pull" Gitワークフローに従います。
 
-1. Fork the repo on GitHub
-2. Clone the project to your own machine
-3. Commit changes to your own branch
-4. Push your work back up to your fork
-5. Submit a Pull request so that we can review your changes
+1. GitHubでリポジトリをフォークする
+2. 自分のマシンにプロジェクトをクローンする
+3. 自分のブランチへ変更をコミットする
+4. 作業内容をフォークしたリポジトリにPushする
+5. 変更内容を確認できるようにしプルリクエストを送信します。
 
-NOTE: Be sure to merge the latest from "upstream" before making a pull request!
+注意：プルリクエストを行う前に、最新のものを "upstream" からマージするようにしてください！
