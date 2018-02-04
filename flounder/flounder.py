@@ -8,10 +8,13 @@ except ImportError:
 
 import csv
 import uuid
+import warnings
 
 from .requests.entity.create import CreateRequest
+from text_utility import to_romaji
+from text_utility import to_hiragana
+from text_utility import to_katakana
 
-import warnings
 
 DEFAULT_VERSION = '20150910'
 
@@ -40,6 +43,9 @@ class Flounder(object):
                  entity_name=None,
                  entity_csv=None,
                  session_id=None):
+        """
+        TODO:docstring here
+        """
         super(Flounder, self).__init__()
         self._client_access_token = client_access_token
         self._base_url = 'api.dialogflow.com'
@@ -51,18 +57,24 @@ class Flounder(object):
             self._session_id = session_id
 
     def create_request(self, entity_name, csv_path):
+        """
+        TODO:docstring here
+        """
         entity = self.create_entity(entity_name, csv_path)
         request = CreateRequest(self.client_access_token, self._base_url,
                                 self._version, entity)
         return request
 
     def create_entity(self, name, csv_path):
+        """
+        TODO:docstring here
+        """
         synonyms = self.to_list(csv_path)
         tmp_list = []
         for synonym in synonyms:
-            romaji = self.to_romaji(synonym)
-            hiragana = self.to_hiragana(synonym)
-            katakana = self.to_katakana(synonym)
+            romaji = to_romaji(synonym)
+            hiragana = to_hiragana(synonym)
+            katakana = to_katakana(synonym)
             new_synonym = {
                 "synonyms": [synonym, romaji, hiragana, katakana],
                 "value": romaji
@@ -70,40 +82,10 @@ class Flounder(object):
             tmp_list.append(new_synonym)
         return {"entries": tmp_list, "name": name}
 
-    def to_romaji(self, text):
-        from pykakasi import kakasi
-        kakasi = kakasi()
-        kakasi.setMode('a', 'a')
-        kakasi.setMode('E', 'a')
-        kakasi.setMode('K', 'a')
-        kakasi.setMode('H', 'a')
-        kakasi.setMode('J', 'a')
-        converter = kakasi.getConverter()
-        return converter.do(text.decode('utf-8'))
-
-    def to_hiragana(self, text):
-        from pykakasi import kakasi
-        kakasi = kakasi()
-        kakasi.setMode('H', 'H')
-        kakasi.setMode('E', 'H')
-        kakasi.setMode('K', 'H')
-        kakasi.setMode('J', 'H')
-        kakasi.setMode('a', 'H')
-        converter = kakasi.getConverter()
-        return converter.do(text.decode('utf-8'))
-
-    def to_katakana(self, text):
-        from pykakasi import kakasi
-        kakasi = kakasi()
-        kakasi.setMode('K', 'K')
-        kakasi.setMode('H', 'K')
-        kakasi.setMode('E', 'K')
-        kakasi.setMode('J', 'K')
-        kakasi.setMode('a', 'K')
-        converter = kakasi.getConverter()
-        return converter.do(text.decode('utf-8'))
-
     def to_list(self, csv_path):
+        """
+        TODO:docstring here
+        """
         tmp_list = []
         with open(csv_path, 'r') as f:
             reader = csv.reader(f)
