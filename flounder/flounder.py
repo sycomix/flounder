@@ -43,6 +43,9 @@ class Flounder(object):
                  entity_name=None,
                  entity_csv=None,
                  session_id=None):
+        """
+        TODO:docstring here
+        """
         super(Flounder, self).__init__()
         self._client_access_token = client_access_token
         self._base_url = 'api.dialogflow.com'
@@ -54,12 +57,18 @@ class Flounder(object):
             self._session_id = session_id
 
     def create_request(self, entity_name, csv_path):
+        """
+        TODO:docstring here
+        """
         entity = self.create_entity(entity_name, csv_path)
         request = CreateRequest(self.client_access_token, self._base_url,
                                 self._version, entity)
         return request
 
     def create_entity(self, name, csv_path):
+        """
+        TODO:docstring here
+        """
         synonyms = self.to_list(csv_path)
         tmp_list = []
         for synonym in synonyms:
@@ -74,6 +83,9 @@ class Flounder(object):
         return {"entries": tmp_list, "name": name}
 
     def to_list(self, csv_path):
+        """
+        TODO:docstring here
+        """
         tmp_list = []
         with open(csv_path, 'r') as f:
             reader = csv.reader(f)

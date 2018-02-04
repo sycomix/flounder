@@ -6,6 +6,9 @@
 """
 
 def to_romaji(text):
+    """
+    TODO:docstring here
+    """
     from pykakasi import kakasi
     kakasi = kakasi()
     kakasi.setMode('a', 'a')
@@ -17,6 +20,9 @@ def to_romaji(text):
     return converter.do(text.decode('utf-8'))
 
 def to_hiragana(text):
+    """
+    TODO:docstring here
+    """
     from pykakasi import kakasi
     kakasi = kakasi()
     kakasi.setMode('H', 'H')
@@ -28,6 +34,9 @@ def to_hiragana(text):
     return converter.do(text.decode('utf-8'))
 
 def to_katakana(text):
+    """
+    TODO:docstring here
+    """
     from pykakasi import kakasi
     kakasi = kakasi()
     kakasi.setMode('K', 'K')
