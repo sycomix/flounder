@@ -88,7 +88,7 @@ class Request(object):
         except AttributeError:
             create = urllib.parse.urlencode(self.create_parameters)
 
-        full_path = self.path + '?' + create
+        full_path = f'{self.path}?{create}'
 
         body = json.dumps(self.entities)
 
@@ -96,8 +96,8 @@ class Request(object):
 
         headers = {
             'Accept': 'application/json',
-            'Authorization': ('Bearer %s' % self.client_access_token),
-            'Content-Length': str(len(body))
+            'Authorization': f'Bearer {self.client_access_token}',
+            'Content-Length': str(len(body)),
         }
 
         headers.update(self._prepare_headers())

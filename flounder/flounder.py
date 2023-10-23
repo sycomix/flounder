@@ -45,16 +45,13 @@ class Flounder(object):
         self._base_url = 'api.dialogflow.com'
         self._version = DEFAULT_VERSION
 
-        if session_id is None:
-            self._session_id = uuid.uuid4().hex
-        else:
-            self._session_id = session_id
+        self._session_id = uuid.uuid4().hex if session_id is None else session_id
 
     def create_request(self, entity_name, csv_path):
         entity = self.create_entity(entity_name, csv_path)
-        request = CreateRequest(self.client_access_token, self._base_url,
-                                self._version, entity)
-        return request
+        return CreateRequest(
+            self.client_access_token, self._base_url, self._version, entity
+        )
 
     def create_entity(self, name, csv_path):
         synonyms = self.to_list(csv_path)
@@ -107,6 +104,5 @@ class Flounder(object):
         tmp_list = []
         with open(csv_path, 'r') as f:
             reader = csv.reader(f)
-            for row in reader:
-                tmp_list.append(row[0])
+            tmp_list.extend(row[0] for row in reader)
             return tmp_list

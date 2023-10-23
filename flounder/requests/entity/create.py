@@ -31,7 +31,7 @@ class CreateRequest(Request):
     def _prepare_headers(self):
         return {
             'Content-Type': 'application/json;',
-            'Authorization': ('Bearer %s' % self.client_access_token)
+            'Authorization': f'Bearer {self.client_access_token}',
         }
 
     def _prepage_begin_request_data(self):
